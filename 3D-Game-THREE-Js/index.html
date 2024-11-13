@@ -1,78 +1,83 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>3D Game</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-        <style>
-           * {
-            margin: 0;
-            padding: 0;
-            color: #f4f4f4;
-           } 
+<head>
+    <title>Game Menu</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+</body>
+<script>
+// Scene setup
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-           body {
-            background: #C02425;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #F0CB35, #C02425);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to left, #F0CB35, #C02425); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-           }
+// Lights
+const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+scene.add(ambientLight);
 
-            #button-grad {background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%)}
-         #button-grad {
-            margin: 10px;
-            padding: 15px 45px;
-            text-align: center;
-            text-transform: uppercase;
-            transition: 0.5s;
-            background-size: 200% auto;
-            color: white;            
-            box-shadow: 0 0 20px #eee;
-            border-radius: 10px;
-            display: block;
-          }
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+directionalLight.position.set(5, 5, 5);
+scene.add(directionalLight);
 
-     
-          #button-grad{background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%)}
-          #button-grad{
-            margin: 10px;
-            padding: 15px 45px;
-            text-align: center;
-            text-transform: uppercase;
-            transition: 0.5s;
-            background-size: 200% auto;
-            color: white;            
-            box-shadow: 0 0 20px #eee;
-            border-radius: 10px;
-            display: block;
-          }
+const pointLight = new THREE.PointLight(0xff0000, 1, 100);
+pointLight.position.set(10, 10, 10);
+scene.add(pointLight);
 
-          #button-grad:hover {
-            background-position: right center; /* change the direction of the change here */
-            color: #fff;
-            text-decoration: none;
-          }
-         
-        </style>
-    </head>
-    <body>
-        <div class="Game">
-            <div class="Game-Menu">
-                <form>
-                    <div class="Game-Menu-Header">
-                        <h1>Game Menu</h1>
-                    </div>
-                    <div class="Main-menu-content">
-                        <label for="Game-Volume">Volume:</label>
-                        <input type="range" id="Game-Volume" max="100" min="0" value = "3" name="Volume" />
-                        <br><br>
-                        <label for="Point-Of-View">Point Of View:</label>
-                        <input type="range" id="Point-Of-View" max="100" min="0" value = "3" name="View" />
-                        <b><marquee>New Settings Coming Soon!</marquee></b>
-                        <progress id="Progress" max="100" min="0" value="0"></progress>
-                        <button id="button-grad">save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </body>
-    <script src="game.js"></script>
+const spotLight = new THREE.SpotLight(0x00ff00, 1);
+spotLight.position.set(-10, 10, 0);
+spotLight.angle = Math.PI / 4;
+spotLight.penumbra = 0.1;
+scene.add(spotLight);
+
+// Create cube
+const cubeGeometry = new THREE.BoxGeometry();
+const cubeMaterial = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+cube.position.x = -2;
+scene.add(cube);
+
+// Create cylinder
+const cylinderGeometry = new THREE.CylinderGeometry(1, 1, 2, 32);
+const cylinderMaterial = new THREE.MeshPhongMaterial({ 
+    color: 0x0088ff,
+    shininess: 100,
+    specular: 0x444444
+});
+const cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
+cylinder.position.x = 2;
+scene.add(cylinder);
+
+camera.position.z = 8;
+
+// Animation
+function animate() {
+    requestAnimationFrame(animate);
+    
+    // Rotate objects
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+    
+    cylinder.rotation.x += 0.01;
+    cylinder.rotation.y += 0.01;
+    
+    // Move point light
+    const time = Date.now() * 0.001;
+    pointLight.position.x = Math.sin(time) * 5;
+    pointLight.position.z = Math.cos(time) * 5;
+    
+    renderer.render(scene, camera);
+}
+
+// Handle window resizing
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+animate();
+</script>
 </html>

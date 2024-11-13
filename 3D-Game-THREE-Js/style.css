@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, white, black, yellow, white, grey);
+    font-family: Arial, sans-serif;
+}
+
+.menu-container {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.gradient-button {
+    position: relative;
+    background: linear-gradient(45deg, #ff6b6b, #ffa502);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: block;
+    width: 200px;
+}
+
+.gradient-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: 0.5s;
+}
+
+.gradient-button:hover::before {
+    left: 100%;
+}
+
+.gradient-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 165, 2, 0.5);
+}
