@@ -4,7 +4,53 @@
         <title>3D Game</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
         <style>
-            
+           * {
+            margin: 0;
+            padding: 0;
+            color: #f4f4f4;
+           } 
+
+           body {
+            background: #C02425;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #F0CB35, #C02425);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #F0CB35, #C02425); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+           }
+
+            #button-grad {background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%)}
+         #button-grad {
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+          }
+
+     
+          #button-grad{background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%)}
+          #button-grad{
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+          }
+
+          #button-grad:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
+         
         </style>
     </head>
     <body>
@@ -22,6 +68,7 @@
                         <input type="range" id="Point-Of-View" max="100" min="0" value = "3" name="View" />
                         <b><marquee>New Settings Coming Soon!</marquee></b>
                         <progress id="Progress" max="100" min="0" value="0"></progress>
+                        <button id="button-grad">save</button>
                     </div>
                 </form>
             </div>
