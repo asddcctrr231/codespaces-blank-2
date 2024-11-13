@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>3D Game</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <style>
+            
+        </style>
+    </head>
+    <body>
+        <div class="Game">
+            <div class="Game-Menu">
+                <form>
+                    <div class="Game-Menu-Header">
+                        <h1>Game Menu</h1>
+                    </div>
+                    <div class="Main-menu-content">
+                        <label for="Game-Volume">Volume:</label>
+                        <input type="range" id="Game-Volume" max="100" min="0" value = "3" name="Volume" />
+                        <br><br>
+                        <label for="Point-Of-View">Point Of View:</label>
+                        <input type="range" id="Point-Of-View" max="100" min="0" value = "3" name="View" />
+                        <b><marquee>New Settings Coming Soon!</marquee></b>
+                        <progress id="Progress" max="100" min="0" value="0"></progress>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+    <script src="game.js"></script>
+</html>
